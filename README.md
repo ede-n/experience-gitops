@@ -4,7 +4,7 @@ Repo to learn GitOps with various implementations.
 
 ## GitOps with ArgoCD
 
-See [GitOps with ArgoCD](docs/argocd.md)
+See [GitOps with ArgoCD](docs/argocd-on-minikube.md)
 
 
 ## Deploy local git server
