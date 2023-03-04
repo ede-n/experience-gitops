@@ -15,7 +15,7 @@
     Minikube
 
     ```
-    minikube start -p $(CLUSTER_NAME) --memory 8192 --cpus 4 --kubernetes-version $(K8S_VERSION)
+    minikube start -p ${CLUSTER_NAME} --memory 8192 --cpus 4 --kubernetes-version ${K8S_VERSION}
     ```
 
     ArgoCD
@@ -30,7 +30,7 @@
     argocd_admin_passwd=$(kubectl get secret/argocd-initial-admin-secret -n argocd -o yaml | yq .data.password | base64 -d)
     ```
 
-3. Access argocd UI
+3. Access argocd UI. In a separate shell window run 
 
     ```
     minikube service argocd-server -p ${CLUSTER_NAME} --url -n argocd
@@ -38,9 +38,16 @@
 
 4. Change the admin password. Refer [doc](https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd_account/).
 
+    Login
+
     ```
     # Get the host:port from the output of minikube command above
-    argocd login 127.0.0.1:56010 --username=admin --insecure
+    argocd login 127.0.0.1:61951 --username=admin --insecure
+    ```
+
+    Change password
+    
+    ```
     argocd account update-password --account admin --current-password ${argocd_admin_passwd} 
     ```
 
