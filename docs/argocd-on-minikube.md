@@ -82,6 +82,9 @@ In a new shell tab run
 Clone the git repo locally and add git-server as its remote.
 
     ```
+    mkdir -p ~/tmp
+    cd ~/tmp
     git clone https://github.com/ede-n/experience-gitops.git
     git remote add git-server git://localhost/experience-gitops.git
+    git push git-server master
     ```
