@@ -46,7 +46,7 @@
     ```
 
     Change password
-    
+
     ```
     argocd account update-password --account admin --current-password ${argocd_admin_passwd} 
     ```
@@ -76,7 +76,7 @@ In a new shell tab run
 
     ```
     git_server_pod_name=$(kubectl get po -n git-server -l app=git-server -oname | awk -F/ '{ print $2 }')
-    kubectl -n scm port-forward "${git_server_pod_name}" 9418  &
+    kubectl -n git-server port-forward "${git_server_pod_name}" 9418  &
     ```
 
 Clone the git repo locally and add git-server as its remote.
