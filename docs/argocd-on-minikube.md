@@ -4,45 +4,45 @@
 
 1. Create minikube cluster and install argocd (Non-HA install)
 
-Global variables
+    Global variables
 
-```
-export CLUSTER_NAME='argocd-demo'
-export K8S_VERSION='1.25.6'
-export K8S_CONTEXT='argocd-demo'
-```
+    ```
+        export CLUSTER_NAME='argocd-demo'
+        export K8S_VERSION='1.25.6'
+        export K8S_CONTEXT='argocd-demo'
+    ```
 
-Minikube
+    Minikube
 
-```
-minikube start -p $(CLUSTER_NAME) --memory 8192 --cpus 4 --kubernetes-version $(K8S_VERSION)
-```
+    ```
+        minikube start -p $(CLUSTER_NAME) --memory 8192 --cpus 4 --kubernetes-version $(K8S_VERSION)
+    ```
 
-ArgoCD
+    ArgoCD
 
-```
-kustomize build workload/argocd/base | kubectl apply -f - --context=${K8S_CONTEXT}
-```
+    ```
+        kustomize build workload/argocd/base | kubectl apply -f - --context=${K8S_CONTEXT}
+    ```
 
 2. Get argocd admin secret
 
-```
-argocd_admin_passwd=$(kubectl get secret/argocd-initial-admin-secret -n argocd -o yaml | yq .data.password | base64 -d)
-```
+    ```
+        argocd_admin_passwd=$(kubectl get secret/argocd-initial-admin-secret -n argocd -o yaml | yq .data.password | base64 -d)
+    ```
 
 3. Access argocd UI
 
-```
-minikube service argocd-server -p ${CLUSTER_NAME} --url -n argocd
-```
+    ```
+        minikube service argocd-server -p ${CLUSTER_NAME} --url -n argocd
+    ```
 
 4. Change the admin password. Refer [doc](https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd_account/).
 
-```
-# Get the host:port from the output of minikube command above
-argocd login 127.0.0.1:56010 --username=admin --insecure
-argocd account update-password --account admin --current-password ${argocd_admin_passwd} 
-```
+    ```
+        # Get the host:port from the output of minikube command above
+        argocd login 127.0.0.1:56010 --username=admin --insecure
+        argocd account update-password --account admin --current-password ${argocd_admin_passwd} 
+    ```
 
 ## Deploy a local git repo
 
