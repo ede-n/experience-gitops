@@ -2,26 +2,19 @@
 
 ## Installation of ArgoCd
 
-1. Create minikube cluster and install argocd (Non-HA install)
+1. Install argocd (Non-HA install)
 
     Global variables
 
     ```
     export CLUSTER_NAME='argocd-demo'
-    export K8S_VERSION='1.25.6'
     export K8S_CONTEXT='argocd-demo'
-    ```
-
-    Minikube
-
-    ```
-    minikube start -p ${CLUSTER_NAME} --memory 8192 --cpus 4 --kubernetes-version ${K8S_VERSION}
     ```
 
     ArgoCD
 
     ```
-    kustomize build workload/argocd/base | kubectl apply -f - --context=${K8S_CONTEXT}
+    kustomize build bootstrap-k8s/argocd/base | kubectl apply -f - --context=${K8S_CONTEXT}
     ```
 
 2. Get argocd admin secret
