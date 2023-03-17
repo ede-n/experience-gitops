@@ -6,8 +6,8 @@ Repo to learn GitOps with various implementations - ArgoCD or FluxCD.
 
 You may create a local cluster with either `Minikube` or `Colima`.
 
-* Follow [this](./docs/local-k8s-cluster-with-minikube.md) document for creating a local k8s cluster with minikube.
-* Follow [this](./docs/local-k8s-cluster-with-colima.md) document for creating a local k8s cluster with colima.
+* Follow [this](./docs/local-k8s-cluster-with-minikube.md) document to create a local k8s cluster with minikube.
+* Follow [this](./docs/local-k8s-cluster-with-colima.md) document to create a local k8s cluster with colima.
 
 ## 2. Install Argocd
 
