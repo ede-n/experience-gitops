@@ -2,16 +2,14 @@
 
 ## Installation of ArgoCd
 
+0. The commands in this document require these global variables
+
+    ```
+    export CLUSTER_NAME='<FILL IN>'
+    export K8S_CONTEXT='<FILL IN>'
+    ```
+
 1. Install argocd (Non-HA install)
-
-    Global variables
-
-    ```
-    export CLUSTER_NAME='argocd-demo'
-    export K8S_CONTEXT='argocd-demo'
-    ```
-
-    ArgoCD
 
     ```
     kustomize build bootstrap-k8s/argocd/base | kubectl apply -f - --context=${K8S_CONTEXT}
@@ -20,13 +18,13 @@
 2. Get argocd admin secret
 
     ```
-    argocd_admin_passwd=$(kubectl get secret/argocd-initial-admin-secret -n argocd -o yaml | yq .data.password | base64 -d)
+    argocd_admin_passwd=$(kubectl get secret/argocd-initial-admin-secret --context=${K8S_CONTEXT} -n argocd -o yaml | yq .data.password | base64 -d)
     ```
 
 3. Access argocd UI. In a separate shell window run 
 
     ```
-    minikube service argocd-server -p ${CLUSTER_NAME} --url -n argocd
+     kubectl port-forward svc/argocd-server -n argocd --context=${K8S_CONTEXT} 8888:443 > /dev/null 2>&1 &
     ```
 
 4. Change the admin password. Refer [doc](https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd_account/).
@@ -34,8 +32,7 @@
     Login
 
     ```
-    # Get the host:port from the output of minikube command above
-    argocd login 127.0.0.1:61951 --username=admin --insecure
+    argocd login 127.0.0.1:8888 --username=admin --insecure
     ```
 
     Change password
@@ -49,7 +46,7 @@
 ### GitServer on k8s
 
     ```
-    kustomize build workload/git-server/base/ | kubectl apply -f -
+    kustomize build workload/git-server/base/ | kubectl apply -f - --context=${K8S_CONTEXT}
     ```
 
 Clone the remote repo on git-server pod

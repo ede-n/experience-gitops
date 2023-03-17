@@ -4,27 +4,10 @@ Repo to learn GitOps with various implementations.
 
 ## 1. Bootstrapping
 
-1. Create a minikube k8s cluster
+You may create a local cluster with either `Minikube` or `Colima`.
 
- Global variables
-
-    ```
-    export CLUSTER_NAME='argocd-demo'
-    export K8S_CONTEXT='argocd-demo'
-    export K8S_VERSION='1.25.6'
-    ```
-
-    Minikube
-
-    ```
-    minikube start -p ${CLUSTER_NAME} --memory 8192 --cpus 4 --kubernetes-version ${K8S_VERSION}
-    ```
-
-2. Bootstrap `kube-system` namespace
-
-    ```
-    kustomize build bootstrap-k8s/kube-system/base | kubectl apply -f - --context=${K8S_CONTEXT}
-    ```
+* Follow [this](./docs/argocd-on-minikube.md) document for creating a local k8s cluster with minikube.
+* Follow [this](./docs/argocd-on-colima.md) document for creating a local k8s cluster with colima.
 
 ## 2. GitOps
 

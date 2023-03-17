@@ -3,4 +3,5 @@ kind: Kustomization
 
 namespace: kube-system
 resources:
+# Provisioner is different for each local cluster provider
 - storage-class.yaml
