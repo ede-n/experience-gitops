@@ -5,8 +5,7 @@
 0. The commands in this document require these global variables
 
     ```
-    export CLUSTER_NAME='<FILL IN>'
-    export K8S_CONTEXT='<FILL IN>'
+    export K8S_CONTEXT='<argocd-demo OR colima-argocd-demo>'
     ```
 
 1. Install argocd (Non-HA install)

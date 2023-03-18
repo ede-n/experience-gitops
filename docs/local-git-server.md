@@ -3,8 +3,7 @@
 0. The following global variables are required to run commands from this document.
 
     ```
-    export CLUSTER_NAME='<FILL IN>'
-    export K8S_CONTEXT='<FILL IN>'
+     export K8S_CONTEXT='<argocd-demo OR colima-argocd-demo>'
     ```
 
 1. Deploy GitServer.
