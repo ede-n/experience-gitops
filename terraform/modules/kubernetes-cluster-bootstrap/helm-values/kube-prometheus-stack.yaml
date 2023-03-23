@@ -1,0 +1,29 @@
+# Create default rules for monitoring the cluster
+# Disable rules for unreachable components
+defaultRules:
+  create: true
+  rules:
+    etcd: false
+    kubeScheduler: true
+
+# Disable component scraping for the kube controller manager, etcd, and kube-scheduler
+# These components are not reachable on EKS
+kubeControllerManager:
+  enabled: true
+kubeEtcd:
+  enabled: false
+kubeScheduler:
+  enabled: true
+
+prometheus:
+  prometheusSpec:
+    # Prometheus StorageSpec for persistent data on AWS EBS
+    # ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
+    storageSpec:
+     volumeClaimTemplate:
+       spec:
+         storageClassName: local-path
+         accessModes: ["ReadWriteOnce"]
+         resources:
+           requests:
+             storage: 10Gi

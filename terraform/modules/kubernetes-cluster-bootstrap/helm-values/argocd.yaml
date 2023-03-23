@@ -1,0 +1,23 @@
+fullnameOverride: "argocd"
+
+redis-ha:
+  enabled: false 
+
+controller:
+  enableStatefulSet: true
+
+server:
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+
+repoServer:
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+
+configs:
+
+  cm:
+    #use annotation for tracking but keep labels for compatibility with other tools
+    application.resourceTrackingMethod: annotation+label
